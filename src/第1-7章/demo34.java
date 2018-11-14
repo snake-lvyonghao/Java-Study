@@ -1,86 +1,47 @@
 import java.util.Random;
 import java.util.Scanner;
 public class demo34 {
-    public static void main(String[] args){
-        int Correct = 0;
-        System.out.print("如果选择整数计算请输入1之后回车，如果选择小数计算请输入2之后回车" + "\n\r");
-        Scanner choose = new Scanner(System.in);
-        int choose1 = choose.nextInt();
-        if(choose1 == 2) {
-            for (int t = 1; t <= 10; t++) {
+    public static void main(String[] args) {
+        System.out.println("------------欢迎来到答题竞技场------------\r\n" + "|         1,每轮你有三次答题的机会        |\r\n" + "|   2,每次输入后你有一次机会确认你的答案  |\r\n" + "|   3,每轮结束后输入任意数字继续下一轮    |\r\n" + "| 4,开始请输入1若退出在每轮结束后输入2即可 |\r\n" + "-------------------------------------------");
+        Scanner scan = new Scanner(System.in);
+        int loop = scan.nextInt();
+        while ( loop == 1) {
+            for(int i = 0; i < 3 ; i++) {
                 AdditionDecimal s = new AdditionDecimal();
                 s.random();
                 double x = s.getX();
+                String X = String.valueOf(x);
                 double y = s.getY();
+                String Y = String.valueOf(y);
                 double sum = s.getSUM();
-                System.out.println(x + " + " + y + " = ");
-                Scanner scan = new Scanner(System.in);
-                double add = scan.nextDouble();
-                //System.out.print(add);
-                if (add == sum) {
-                    System.out.print("回答正确分数加1 进行下一题" + "\n\r");
-                    Correct++;
-                } else {
-                    System.out.print("回答错误，还有一次机会，请再次输入答案" + "\n\r");
-                    Scanner scan1 = new Scanner(System.in);
-                    double add1 = scan1.nextDouble();
-                    if (add1 == sum) {
-                        System.out.print("回答正确分数加1 进行下一题" + "\n\r");
-                        Correct++;
-                    } else {
-                        System.out.print("回答错误分数减1" + "\n\r");
-                        Correct--;
+                String SUM = String.valueOf(sum);
+                System.out.println("你要计算的是 ： " + X + "+" + Y + " = \r\n" + "请输入你的答案按回车结束");
+                Scanner Answer = new Scanner(System.in);
+                double add = Answer.nextDouble();
+                System.out.println("你确定你的答案是" + add + "嘛？" + "确定按1修改按0\r\n");
+                Scanner data = new Scanner((System.in));
+                int Data = data.nextInt();
+                if(Data == 1){
+                    if(add == sum){
+                        System.out.println("恭喜你回答正确\r\n");
                     }
+                    else
+                        System.out.println("很可惜你的答案是错误的正确答案是： " + Y + "\r\n");
+                }
+                if(Data == 0) {
+                    System.out.println("请输入你要修改的数值\r\n");
+                    Scanner modify = new Scanner(System.in);
+                    add = modify.nextDouble();
+                    if(add == sum){
+                        System.out.println("恭喜你回答正确\r\n");
+                    }
+                    else
+                        System.out.println("很可惜你的答案是错误的正确答案是： " + Y + "\r\n");
                 }
             }
-            System.out.print("你的最后得分为 " + Correct + "\r\n");
-            if (Correct <= -5) {
-                System.out.print("很弱了，能不能好好算算" + "\n\r");
-            } else if (Correct > -5 && Correct <= 5) {
-                System.out.print("还行吧，能力有待提升" + "\n\r");
-            } else if (Correct > 5 && Correct < 10) {
-                System.out.print("能力很好哦，加油吧" + "\n\r");
-            } else {
-                System.out.print("哇塞全对了，你太棒了" + "\n\r");
-            }
-        }
-        else {
-            for (int t = 1; t <= 10; t++) {
-                AdditionInteger s = new AdditionInteger();
-                s.random();
-                double x = s.getX();
-                double y = s.getY();
-                double sum = s.getSUM();
-                System.out.println(x + " + " + y + " = ");
-                Scanner scan = new Scanner(System.in);
-                double add = scan.nextDouble();
-                //System.out.print(add);
-                if (add == sum) {
-                    System.out.print("回答正确分数加1 进行下一题" + "\n\r");
-                    Correct++;
-                } else {
-                    System.out.print("回答错误，还有一次机会，请再次输入答案" + "\n\r");
-                    Scanner scan1 = new Scanner(System.in);
-                    double add1 = scan1.nextDouble();
-                    if (add1 == sum) {
-                        System.out.print("回答正确分数加1 进行下一题" + "\n\r");
-                        Correct++;
-                    } else {
-                        System.out.print("回答错误分数减1" + "\n\r");
-                        Correct--;
-                    }
-                }
-            }
-            System.out.print("你的最后得分为 " + Correct + "\r\n");
-            if (Correct <= -5) {
-                System.out.print("很弱了，能不能好好算算" + "\n\r");
-            } else if (Correct > -5 && Correct <= 5) {
-                System.out.print("还行吧，能力有待提升" + "\n\r");
-            } else if (Correct > 5 && Correct < 10) {
-                System.out.print("能力很好哦，加油吧" + "\n\r");
-            } else {
-                System.out.print("哇塞全对了，你太棒了" + "\n\r");
-            }
+            System.out.println("你完成了本轮游戏你是否继续 继续请输入1 退出请输入2" + "\r\n");
+            Scanner scan2 = new Scanner(System.in);
+            loop = scan2.nextInt();
         }
     }
 }
@@ -119,27 +80,5 @@ class AdditionDecimal  extends Addition {
         //this.sum = this.X + this.Y;
         this.SUM= (double)(Math.round((this.X + this.Y)*100))/100;
 
-    }
-}
-class AdditionInteger  extends Addition {
-    double x,y,X,Y,sum,SUM;
-    public double getX(){
-        return this.X;
-    }
-    public double getY(){
-        return this.Y;
-    }
-    public  double getSUM(){
-        return this.SUM;
-    }
-    public void random(){
-        Random rx = new Random();
-        this.X = (double)rx.nextInt(10000);
-        //this.X = (double)(Math.round(this.x*100))/100;
-        Random ry = new Random();
-        this.Y = (double)ry.nextInt(10000);
-        //this.Y = (double)(Math.round(this.y*100))/100;
-        this.SUM = this.X + this.Y;
-        //this.SUM= (double)(Math.round((this.X + this.Y)*100))/100;
     }
 }
